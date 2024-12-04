@@ -1,9 +1,10 @@
 from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import IsAdminUser
+from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK, HTTP_201_CREATED, HTTP_400_BAD_REQUEST
 
 from users.models import Permission, Role, User
+from users.permissions import L1Permission, L2Permission, L3Permission
 from users.serializers import PermissionSerializer, RoleSerializer, UserSerializer
 
 
@@ -164,7 +165,7 @@ def get_permissions(request):
 
 @api_view(["GET"])
 @permission_classes([IsAdminUser])
-def get_permissions(request, id):
+def get_role_permissions(request, id):
     """
     Get permissions list for a role
     """
@@ -185,3 +186,53 @@ def get_permissions(request, id):
             status=HTTP_400_BAD_REQUEST,
         )
     
+
+@api_view(["GET"])
+@permission_classes([IsAuthenticated, L1Permission])
+def api1(request):
+    """
+    API_ONE
+    """
+
+    return Response(
+        {"success": True, "message": "You are using API_ONE", "data": {}},
+        status=HTTP_200_OK,
+    )
+
+
+@api_view(["GET"])
+@permission_classes([IsAuthenticated, L1Permission])
+def api2(request):
+    """
+    API_TWO
+    """
+
+    return Response(
+        {"success": True, "message": "You are using API_TWO", "data": {}},
+        status=HTTP_200_OK,
+    )
+
+
+@api_view(["GET"])
+@permission_classes([IsAuthenticated, L2Permission])
+def api3(request):
+    """
+    API_THREE
+    """
+
+    return Response(
+        {"success": True, "message": "You are using API_THREE", "data": {}},
+        status=HTTP_200_OK,
+    )
+
+@api_view(["GET"])
+@permission_classes([IsAuthenticated, L3Permission])
+def api4(request):
+    """
+    API_FOUR
+    """
+
+    return Response(
+        {"success": True, "message": "You are using API_FOUR", "data": {}},
+        status=HTTP_200_OK,
+    )
