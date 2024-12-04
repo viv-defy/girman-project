@@ -1,7 +1,10 @@
 from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import AllowAny, IsAdminUser
+from rest_framework.permissions import IsAdminUser
 from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK, HTTP_201_CREATED
+
+from users.models import User
+from users.serializers import UserSerializer
 
 
 @api_view(["POST"])
@@ -25,14 +28,17 @@ def add_user(request):
 @permission_classes([IsAdminUser])
 def get_users(request):
     """
-    Get a list of users
+    Get users list
     """
+
+    users = User.objects.all()
+    user_serializer = UserSerializer(users, many=True)
 
     return Response(
         {
             "success": True,
             "message": "Users list",
-            "data": {}
+            "data": user_serializer.data
         },
         status=HTTP_200_OK
     )
