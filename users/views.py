@@ -1,3 +1,4 @@
+from datetime import datetime, timedelta, timezone
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from rest_framework.response import Response
@@ -247,10 +248,34 @@ def get_access_logs(request):
     """
 
     log_file_path = "access.log"  
+    hours = request.query_params.get("hours", 1)
 
     try:
         with open(log_file_path, "r") as log_file:
             logs = log_file.readlines()
+
+        if hours:
+            try:
+                hours = int(hours)
+                current_time = datetime.now(timezone.utc)
+                cutoff_time = current_time - timedelta(hours=hours)
+
+                filtered_logs = []
+                for log in logs:
+                    # Log timestamp is at the start in the format: "YYYY-MM-DD HH:MM:SS"
+                    timestamp_str = log.split("|")[0].strip()
+                    log_time = datetime.strptime(timestamp_str, "%Y-%m-%d %H:%M:%S.%f%z")
+
+                    print(log_time, cutoff_time)
+                    if log_time >= cutoff_time:
+                        filtered_logs.append(log)
+
+                logs = filtered_logs
+            except ValueError:
+                return Response(
+                    {"success": False, "message": "Invalid 'hours' parameter. It must be an integer."},
+                    status=HTTP_400_BAD_REQUEST,
+                )
 
         return Response(
             {"success": True, "message": "Access logs retrieved", "data": logs},
