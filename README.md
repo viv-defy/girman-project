@@ -80,8 +80,9 @@ This should start the app on your [local](http://localhost:8000)
 4. Setup Postman
 
    1. Import postman-collection.json into your postman app
-   2. Use the token created in step 3.1
-   3. Setup token in you postman variables
+   2. Setup girman-base-url in Postman variables
+   3. Use the token created in step 3.1
+   4. Setup token in you Postman variables
 
 5. Run the management endpoints on Postman to create users, assign roles and permissions
 
