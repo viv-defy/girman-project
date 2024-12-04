@@ -127,6 +127,12 @@ else:
     DATABASES = {
         'default': dj_database_url.parse(env("DB_URL"))
     }
+    CSRF_COOKIE_SECURE = True  
+    CSRF_TRUSTED_ORIGINS = [env("DOMAIN_URL")]  
+    CSRF_COOKIE_HTTPONLY = False  
+
+    SECURE_SSL_REDIRECT = True 
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https') 
 
 
 AUTH_USER_MODEL = "users.User"
