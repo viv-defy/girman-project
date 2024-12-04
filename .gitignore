@@ -3,3 +3,6 @@ env/
 
 # local DBs
 db.sqlite3
+
+# python optimization files
+__pycache__/
