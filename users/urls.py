@@ -6,4 +6,5 @@ urlpatterns = [
     path("", add_user, name="create-user"),
     path("list", get_users, name="get-all-users"),
     path("<int:id>/role", assign_role, name="assign-user-role"),
+    path("roles", get_users, name="get-all-roles"),
 ]

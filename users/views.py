@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK, HTTP_201_CREATED, HTTP_400_BAD_REQUEST
 
 from users.models import Role, User
-from users.serializers import UserSerializer
+from users.serializers import RoleSerializer, UserSerializer
 
 
 @api_view(["POST"])
@@ -89,3 +89,19 @@ def assign_role(request, id):
             {"success": False, "message": f"The role with id {role_id} does not exist"},
             status=HTTP_400_BAD_REQUEST,
         )
+
+
+@api_view(["GET"])
+@permission_classes([IsAdminUser])
+def get_users(request):
+    """
+    Get roles list
+    """
+
+    roles = Role.objects.all()
+    role_serializer = RoleSerializer(roles, many=True)
+
+    return Response(
+        {"success": True, "message": "Roles list", "data": role_serializer.data},
+        status=HTTP_200_OK,
+    )
