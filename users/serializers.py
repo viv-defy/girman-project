@@ -4,7 +4,7 @@ from users.models import User
 
 class UserSerializer(serializers.ModelSerializer):
     """
-    List users
+    List user data
     """
 
     class Meta:
