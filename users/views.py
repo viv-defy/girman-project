@@ -160,4 +160,28 @@ def get_permissions(request):
         {"success": True, "message": "Permissions list", "data": permission_serializer.data},
         status=HTTP_200_OK,
     )
+
+
+@api_view(["GET"])
+@permission_classes([IsAdminUser])
+def get_permissions(request, id):
+    """
+    Get permissions list for a role
+    """
+
+    try:
+        role = Role.objects.get(id=id)
+        permissions = role.permissions.all()
+        permission_serializer = PermissionSerializer(permissions, many=True)
+
+        return Response(
+            {"success": True, "message": "Permissions list", "data": permission_serializer.data},
+            status=HTTP_200_OK,
+        )
+    
+    except Role.DoesNotExist:
+        return Response(
+            {"success": False, "message": f"The role with id {id} does not exist"},
+            status=HTTP_400_BAD_REQUEST,
+        )
     

@@ -11,4 +11,5 @@ urlpatterns = [
     path("roles/<int:id>/permission", assign_permission, name="assign-role-permission"),
 
     path("permissions", get_permissions, name="get-all-permissions"),
+    path("roles/<int:id>/permissions", get_permissions, name="assign-role-permission")
 ]
