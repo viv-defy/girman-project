@@ -5,8 +5,8 @@ from django.db import migrations
 
 # up-migration
 def add_roles(apps, schema_editor):
-    Role = apps.get_model('users', 'Role')
-    roles = ['staff', 'supervisor', 'admin']
+    Role = apps.get_model("users", "Role")
+    roles = ["staff", "supervisor", "admin"]
     for role_name in roles:
         Role.objects.get_or_create(name=role_name)
 

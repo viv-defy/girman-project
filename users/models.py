@@ -4,17 +4,17 @@ from django.db import models
 
 class Role(models.Model):
     name = models.CharField(max_length=100, unique=True)
-    permissions = models.ManyToManyField("Permission", related_name='roles', blank=True)
+    permissions = models.ManyToManyField("Permission", related_name="roles", blank=True)
 
     def __str__(self):
         return self.name
-    
+
     def add_permission(self, permission):
         """
         Assign a permission to the user.
         """
         self.permissions.add(permission)
-    
+
     class Meta:
         db_table = "role"
 
@@ -26,7 +26,7 @@ class Permission(models.Model):
 
     def __str__(self):
         return self.codename
-    
+
     class Meta:
         db_table = "permission"
 

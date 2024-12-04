@@ -5,19 +5,33 @@ from django.db import migrations
 
 # up-migration
 def add_permissions(apps, schema_editor):
-    Permission = apps.get_model('users', 'Permission')  
+    Permission = apps.get_model("users", "Permission")
 
     permissions = [
-        {"name": "Level 1", "codename": "level1", "description": "Permission for level 1"},
-        {"name": "Level 2", "codename": "level2", "description": "Permission for level 2"},
-        {"name": "Level 3", "codename": "level3", "description": "Permission for level 3"},
+        {
+            "name": "Level 1",
+            "codename": "level1",
+            "description": "Permission for level 1",
+        },
+        {
+            "name": "Level 2",
+            "codename": "level2",
+            "description": "Permission for level 2",
+        },
+        {
+            "name": "Level 3",
+            "codename": "level3",
+            "description": "Permission for level 3",
+        },
         {"name": "Super", "codename": "super", "description": "Super permission"},
     ]
 
     for perm in permissions:
         Permission.objects.create(**perm)
 
+
 # no down-migration required
+
 
 class Migration(migrations.Migration):
 
