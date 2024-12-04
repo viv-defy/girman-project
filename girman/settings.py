@@ -10,25 +10,16 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
-import json
 import environ
 import os
 from pathlib import Path
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-env = environ.Env(
-    # set casting, default value
-    DEBUG=(bool, False)
-)
-
-# Set the project base directory
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-# Take environment variables from .env file
+env = environ.Env()
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -122,7 +113,8 @@ WSGI_APPLICATION = 'girman.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DEPLOYMENT_ENVIRONMENT = env("DEPLOYMENT_ENVIRONMENT")
+
+DEPLOYMENT_ENVIRONMENT = env("DEPLOYMENT_ENVIRONMENT", default="Development")
 if DEPLOYMENT_ENVIRONMENT == "Development":
     DATABASES = {
         'default': {
@@ -130,12 +122,10 @@ if DEPLOYMENT_ENVIRONMENT == "Development":
             'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
-
 else:
+    import dj_database_url
     DATABASES = {
-        'default': {
-            json.loads("DB_URL")
-        }
+        'default': dj_database_url.parse(env("DB_URL"))
     }
 
 
