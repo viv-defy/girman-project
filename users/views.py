@@ -1,7 +1,7 @@
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from rest_framework.response import Response
-from rest_framework.status import HTTP_200_OK, HTTP_201_CREATED, HTTP_400_BAD_REQUEST
+from rest_framework.status import HTTP_200_OK, HTTP_201_CREATED, HTTP_400_BAD_REQUEST, HTTP_500_INTERNAL_SERVER_ERROR
 
 from users.models import Permission, Role, User
 from users.permissions import L1Permission, L2Permission, L3Permission
@@ -225,6 +225,7 @@ def api3(request):
         status=HTTP_200_OK,
     )
 
+
 @api_view(["GET"])
 @permission_classes([IsAuthenticated, L3Permission])
 def api4(request):
@@ -236,3 +237,34 @@ def api4(request):
         {"success": True, "message": "You are using API_FOUR", "data": {}},
         status=HTTP_200_OK,
     )
+
+
+@api_view(["GET"])
+@permission_classes([IsAdminUser])  
+def get_access_logs(request):
+    """
+    Return the access logs from the log file.
+    """
+
+    log_file_path = "access.log"  
+
+    try:
+        with open(log_file_path, "r") as log_file:
+            logs = log_file.readlines()
+
+        return Response(
+            {"success": True, "message": "Access logs retrieved", "data": logs},
+            status=HTTP_200_OK,
+        )
+    
+    except FileNotFoundError:
+        return Response(
+            {"success": False, "message": "Log file not found"},
+            status=HTTP_500_INTERNAL_SERVER_ERROR,
+        )
+    
+    except Exception as e:
+        return Response(
+            {"success": False, "message": f"Error reading log file: {str(e)}"},
+            status=HTTP_500_INTERNAL_SERVER_ERROR,
+        )

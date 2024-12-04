@@ -1,6 +1,6 @@
 from django.urls import path
 
-from users.views import add_user, api1, api2, api3, api4, assign_permission, assign_role, get_permissions, get_role_permissions, get_roles, get_users
+from users.views import add_user, api1, api2, api3, api4, assign_permission, assign_role, get_access_logs, get_permissions, get_role_permissions, get_roles, get_users
 
 urlpatterns = [
     path("", add_user, name="create-user"),
@@ -17,4 +17,6 @@ urlpatterns = [
     path("api-two", api2, name="api-two"),
     path("api-three", api3, name="api-three"),
     path("api-four", api4, name="api-four"),
+
+    path("access-logs", get_access_logs, name="access-logs")
 ]
