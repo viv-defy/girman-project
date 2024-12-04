@@ -1,0 +1,1131 @@
+{
+	"info": {
+		"_postman_id": "7ad3df66-3435-4582-8f2c-93b1b51f215a",
+		"name": "Girman Tech",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32386598"
+	},
+	"item": [
+		{
+			"name": "User Management",
+			"item": [
+				{
+					"name": "Create User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"girman ops\",\n    \"password\": \"@Girman\",\n    \"email\": \"ops@griman.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{girman-base-url}}/users/",
+							"host": [
+								"{{girman-base-url}}"
+							],
+							"path": [
+								"users",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Missing Data",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"girman\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{girman-base-url}}/users/",
+									"host": [
+										"{{girman-base-url}}"
+									],
+									"path": [
+										"users",
+										""
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 04 Dec 2024 05:54:16 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "71"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"message\": \"Kindly provide both username and password\"\n}"
+						},
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"girman tech\",\n    \"password\": \"@Girman\",\n    \"email\": \"all@griman.com\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{girman-base-url}}/users/",
+									"host": [
+										"{{girman-base-url}}"
+									],
+									"path": [
+										"users",
+										""
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 04 Dec 2024 06:54:38 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "227"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"User data\",\n    \"data\": {\n        \"user\": {\n            \"id\": 3,\n            \"username\": \"girman tech\",\n            \"email\": \"all@griman.com\",\n            \"is_active\": true,\n            \"created_at\": \"2024-12-04T06:54:38.962270Z\",\n            \"updated_at\": \"2024-12-04T06:54:38.962312Z\",\n            \"roles\": []\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "User Lists",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{girman-base-url}}/users/list",
+							"host": [
+								"{{girman-base-url}}"
+							],
+							"path": [
+								"users",
+								"list"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{girman-base-url}}/users/list",
+									"host": [
+										"{{girman-base-url}}"
+									],
+									"path": [
+										"users",
+										"list"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 04 Dec 2024 06:50:17 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "OPTIONS, GET"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "455"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Users list\",\n    \"data\": [\n        {\n            \"id\": 1,\n            \"username\": \"vishnu vardhan\",\n            \"email\": \"hello@girman.com\",\n            \"is_active\": true,\n            \"created_at\": \"2024-12-03T16:13:11.094141Z\",\n            \"updated_at\": \"2024-12-03T16:13:11.094164Z\",\n            \"roles\": [\n                {\n                    \"id\": 2,\n                    \"name\": \"supervisor\"\n                },\n                {\n                    \"id\": 3,\n                    \"name\": \"admin\"\n                }\n            ]\n        },\n        {\n            \"id\": 2,\n            \"username\": \"girman\",\n            \"email\": \"\",\n            \"is_active\": true,\n            \"created_at\": \"2024-12-04T05:53:41.422479Z\",\n            \"updated_at\": \"2024-12-04T05:53:41.422517Z\",\n            \"roles\": [\n                {\n                    \"id\": 1,\n                    \"name\": \"staff\"\n                }\n            ]\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "User Role",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"role_id\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{girman-base-url}}/users/2/role",
+							"host": [
+								"{{girman-base-url}}"
+							],
+							"path": [
+								"users",
+								"2",
+								"role"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"role_id\": 1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{girman-base-url}}/users/2/role",
+									"host": [
+										"{{girman-base-url}}"
+									],
+									"path": [
+										"users",
+										"2",
+										"role"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 04 Dec 2024 06:45:52 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "OPTIONS, PATCH"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "228"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Updated user data\",\n    \"data\": {\n        \"user\": {\n            \"id\": 2,\n            \"username\": \"girman\",\n            \"is_active\": true,\n            \"created_at\": \"2024-12-04T05:53:41.422479Z\",\n            \"updated_at\": \"2024-12-04T05:53:41.422517Z\",\n            \"roles\": [\n                {\n                    \"id\": 1,\n                    \"name\": \"staff\"\n                }\n            ]\n        }\n    }\n}"
+						},
+						{
+							"name": "Role id does not exist",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"role_id\": 4\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{girman-base-url}}/users/2/role",
+									"host": [
+										"{{girman-base-url}}"
+									],
+									"path": [
+										"users",
+										"2",
+										"role"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 04 Dec 2024 06:45:22 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "OPTIONS, PATCH"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "63"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"message\": \"The role with id 4 does not exist\"\n}"
+						},
+						{
+							"name": "User does not exist",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"role_id\": 4\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{girman-base-url}}/users/4/role",
+									"host": [
+										"{{girman-base-url}}"
+									],
+									"path": [
+										"users",
+										"4",
+										"role"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 04 Dec 2024 06:34:05 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "OPTIONS, PATCH"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "63"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"message\": \"The user with id 3 does not exist\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Role Management",
+			"item": [
+				{
+					"name": "Role lists",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{girman-base-url}}/users/roles",
+							"host": [
+								"{{girman-base-url}}"
+							],
+							"path": [
+								"users",
+								"roles"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{girman-base-url}}/users/roles",
+									"host": [
+										"{{girman-base-url}}"
+									],
+									"path": [
+										"users",
+										"roles"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 04 Dec 2024 07:56:54 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "288"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Roles list\",\n    \"data\": [\n        {\n            \"id\": 1,\n            \"name\": \"staff\",\n            \"permissions\": [\n                {\n                    \"id\": 1,\n                    \"name\": \"Can Access Everything\",\n                    \"codename\": \"SUPER_ACCESS\",\n                    \"description\": \"Has permissions of a superuser\"\n                }\n            ]\n        },\n        {\n            \"id\": 2,\n            \"name\": \"supervisor\",\n            \"permissions\": []\n        },\n        {\n            \"id\": 3,\n            \"name\": \"admin\",\n            \"permissions\": []\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Assign Permissions",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"permission_id\": 2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{girman-base-url}}/users/roles/3/permission",
+							"host": [
+								"{{girman-base-url}}"
+							],
+							"path": [
+								"users",
+								"roles",
+								"3",
+								"permission"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"permission_id\": 1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{girman-base-url}}/users/roles/1/permission",
+									"host": [
+										"{{girman-base-url}}"
+									],
+									"path": [
+										"users",
+										"roles",
+										"1",
+										"permission"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 04 Dec 2024 07:42:37 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "OPTIONS, PATCH"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "215"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Updated role data\",\n    \"data\": {\n        \"user\": {\n            \"id\": 1,\n            \"name\": \"staff\",\n            \"permissions\": [\n                {\n                    \"id\": 1,\n                    \"name\": \"Can Access Everything\",\n                    \"codename\": \"SUPER_ACCESS\",\n                    \"description\": \"Has permissions of a superuser\"\n                }\n            ]\n        }\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Permission Management",
+			"item": [
+				{
+					"name": "Permissions List",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{staff_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{girman-base-url}}/users/permissions",
+							"host": [
+								"{{girman-base-url}}"
+							],
+							"path": [
+								"users",
+								"permissions"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{girman-base-url}}/users/permissions",
+									"host": [
+										"{{girman-base-url}}"
+									],
+									"path": [
+										"users",
+										"permissions"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 04 Dec 2024 07:57:21 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "167"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Permissions list\",\n    \"data\": [\n        {\n            \"id\": 1,\n            \"name\": \"Can Access Everything\",\n            \"codename\": \"SUPER_ACCESS\",\n            \"description\": \"Has permissions of a superuser\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Role Permissions",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{girman-base-url}}/users/roles/1/permissions",
+							"host": [
+								"{{girman-base-url}}"
+							],
+							"path": [
+								"users",
+								"roles",
+								"1",
+								"permissions"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{girman-base-url}}/users/roles/1/permissions",
+									"host": [
+										"{{girman-base-url}}"
+									],
+									"path": [
+										"users",
+										"roles",
+										"1",
+										"permissions"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 04 Dec 2024 08:03:24 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "167"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Permissions list\",\n    \"data\": [\n        {\n            \"id\": 1,\n            \"name\": \"Can Access Everything\",\n            \"codename\": \"SUPER_ACCESS\",\n            \"description\": \"Has permissions of a superuser\"\n        }\n    ]\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Access Validation",
+			"item": [
+				{
+					"name": "API_ONE",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{staff_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{girman-base-url}}/users/api-one",
+							"host": [
+								"{{girman-base-url}}"
+							],
+							"path": [
+								"users",
+								"api-one"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "API_TWO",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{admin_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{girman-base-url}}/users/api-two",
+							"host": [
+								"{{girman-base-url}}"
+							],
+							"path": [
+								"users",
+								"api-two"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "API_THREE",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{admin_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{girman-base-url}}/users/api-three",
+							"host": [
+								"{{girman-base-url}}"
+							],
+							"path": [
+								"users",
+								"api-three"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "API_FOUR",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{admin_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{girman-base-url}}/users/api-four",
+							"host": [
+								"{{girman-base-url}}"
+							],
+							"path": [
+								"users",
+								"api-four"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Access Logs",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{girman-base-url}}/users/access-logs?hours=1",
+					"host": [
+						"{{girman-base-url}}"
+					],
+					"path": [
+						"users",
+						"access-logs"
+					],
+					"query": [
+						{
+							"key": "hours",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
