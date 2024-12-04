@@ -62,6 +62,30 @@ Postman Collection - [JSON file](/postman-collection.json) within the repo
 
 This should start the app on your [local](http://localhost:8000)
 
+## Testing the App/End Points
+
+1. As the app starts, you can login to admin panel using default superuser details (sent in mail)
+2. On the admin panel, you have by default
+
+   1. Users - admin
+   2. Roles - staff, supervisor, admin
+   3. Permissions - level1, level2, level3, super
+
+   Further details about the same can be viewed in admin details
+
+3. Add Token
+
+   1. You can access the tokens table to add tokens to admin(user)
+
+4. Setup Postman
+
+   1. Import postman-collection.json into your postman app
+   2. Setup girman-base-url in Postman variables
+   3. Use the token created in step 3.1
+   4. Setup token in you Postman variables
+
+5. Run the management endpoints on Postman to create users, assign roles and permissions
+
 ## Improvements
 
 1. The app could be named rbac instead of users. This would ensure cleaner and more meaningful urls for the apis

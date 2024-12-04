@@ -2,13 +2,14 @@ import logging
 from django.utils.timezone import now
 
 
-logger = logging.getLogger('access_logger')
+logger = logging.getLogger("access_logger")
 
 
 class AccessLogMiddleware:
     """
     Middleware to log each access attempt and its outcome (granted or denied).
     """
+
     def __init__(self, get_response):
         self.get_response = get_response
 

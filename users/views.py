@@ -2,7 +2,12 @@ from datetime import datetime, timedelta, timezone
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from rest_framework.response import Response
-from rest_framework.status import HTTP_200_OK, HTTP_201_CREATED, HTTP_400_BAD_REQUEST, HTTP_500_INTERNAL_SERVER_ERROR
+from rest_framework.status import (
+    HTTP_200_OK,
+    HTTP_201_CREATED,
+    HTTP_400_BAD_REQUEST,
+    HTTP_500_INTERNAL_SERVER_ERROR,
+)
 
 from users.models import Permission, Role, User
 from users.permissions import L1Permission, L2Permission, L3Permission
@@ -21,7 +26,10 @@ def add_user(request):
     email = request.data.get("email", None)
     if not username or not password or not email:
         return Response(
-            {"success": False, "message": "Kindly provide both username, password and email"},
+            {
+                "success": False,
+                "message": "Kindly provide both username, password and email",
+            },
             status=HTTP_400_BAD_REQUEST,
         )
 
@@ -143,7 +151,10 @@ def assign_permission(request, id):
 
     except Permission.DoesNotExist:
         return Response(
-            {"success": False, "message": f"The permission with id {permission_id} does not exist"},
+            {
+                "success": False,
+                "message": f"The permission with id {permission_id} does not exist",
+            },
             status=HTTP_400_BAD_REQUEST,
         )
 
@@ -159,7 +170,11 @@ def get_permissions(request):
     permission_serializer = PermissionSerializer(permissions, many=True)
 
     return Response(
-        {"success": True, "message": "Permissions list", "data": permission_serializer.data},
+        {
+            "success": True,
+            "message": "Permissions list",
+            "data": permission_serializer.data,
+        },
         status=HTTP_200_OK,
     )
 
@@ -177,16 +192,20 @@ def get_role_permissions(request, id):
         permission_serializer = PermissionSerializer(permissions, many=True)
 
         return Response(
-            {"success": True, "message": "Permissions list", "data": permission_serializer.data},
+            {
+                "success": True,
+                "message": "Permissions list",
+                "data": permission_serializer.data,
+            },
             status=HTTP_200_OK,
         )
-    
+
     except Role.DoesNotExist:
         return Response(
             {"success": False, "message": f"The role with id {id} does not exist"},
             status=HTTP_400_BAD_REQUEST,
         )
-    
+
 
 @api_view(["GET"])
 @permission_classes([IsAuthenticated, L1Permission])
@@ -241,13 +260,13 @@ def api4(request):
 
 
 @api_view(["GET"])
-@permission_classes([IsAdminUser])  
+@permission_classes([IsAdminUser])
 def get_access_logs(request):
     """
     Return the access logs from the log file.
     """
 
-    log_file_path = "access.log"  
+    log_file_path = "access.log"
     hours = request.query_params.get("hours", 1)
 
     try:
@@ -264,7 +283,9 @@ def get_access_logs(request):
                 for log in logs:
                     # Log timestamp is at the start in the format: "YYYY-MM-DD HH:MM:SS"
                     timestamp_str = log.split("|")[0].strip()
-                    log_time = datetime.strptime(timestamp_str, "%Y-%m-%d %H:%M:%S.%f%z")
+                    log_time = datetime.strptime(
+                        timestamp_str, "%Y-%m-%d %H:%M:%S.%f%z"
+                    )
 
                     print(log_time, cutoff_time)
                     if log_time >= cutoff_time:
@@ -273,7 +294,10 @@ def get_access_logs(request):
                 logs = filtered_logs
             except ValueError:
                 return Response(
-                    {"success": False, "message": "Invalid 'hours' parameter. It must be an integer."},
+                    {
+                        "success": False,
+                        "message": "Invalid 'hours' parameter. It must be an integer.",
+                    },
                     status=HTTP_400_BAD_REQUEST,
                 )
 
@@ -281,13 +305,13 @@ def get_access_logs(request):
             {"success": True, "message": "Access logs retrieved", "data": logs},
             status=HTTP_200_OK,
         )
-    
+
     except FileNotFoundError:
         return Response(
             {"success": False, "message": "Log file not found"},
             status=HTTP_500_INTERNAL_SERVER_ERROR,
         )
-    
+
     except Exception as e:
         return Response(
             {"success": False, "message": f"Error reading log file: {str(e)}"},
