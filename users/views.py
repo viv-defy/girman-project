@@ -16,13 +16,14 @@ def add_user(request):
 
     username = request.data.get("username", None)
     password = request.data.get("password", None)
-    if not username or not password:
+    email = request.data.get("email", None)
+    if not username or not password or not email:
         return Response(
-            {"success": False, "message": "Kindly provide both username and password"},
+            {"success": False, "message": "Kindly provide both username, password and email"},
             status=HTTP_400_BAD_REQUEST,
         )
 
-    user = User.objects.create(username=username, password=password)
+    user = User.objects.create(username=username, password=password, email=email)
     user_serializer = UserSerializer(user)
 
     return Response(
