@@ -4,5 +4,8 @@ env/
 # local DBs
 db.sqlite3
 
+# logs
+access.log
+
 # python optimization files
 __pycache__/
