@@ -141,6 +141,6 @@ def assign_permission(request, id):
 
     except Permission.DoesNotExist:
         return Response(
-            {"success": False, "message": f"The role with id {permission_id} does not exist"},
+            {"success": False, "message": f"The permission with id {permission_id} does not exist"},
             status=HTTP_400_BAD_REQUEST,
         )
