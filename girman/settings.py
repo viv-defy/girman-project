@@ -30,7 +30,7 @@ SECRET_KEY = 'django-insecure--uo5x9#5b^j_)yn2w9vww@8%8%jrm#yamok2d6rh#g!ywls1rn
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["girman-project.onrender.com"]
 
 
 # Application definition
