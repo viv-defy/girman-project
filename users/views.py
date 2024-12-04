@@ -3,7 +3,7 @@ from rest_framework.permissions import IsAdminUser
 from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK, HTTP_201_CREATED, HTTP_400_BAD_REQUEST
 
-from users.models import User
+from users.models import Role, User
 from users.serializers import UserSerializer
 
 
@@ -53,12 +53,38 @@ def get_users(request):
 
 @api_view(["PATCH"])
 @permission_classes([IsAdminUser])
-def assign_permission(request):
+def assign_role(request, id):
     """
-    Assign user permissions
+    Assign user role
     """
 
-    return Response(
-        {"success": True, "message": "Updated user data", "data": {"user": {}}},
-        status=HTTP_200_OK,
-    )
+    try:
+        user = User.objects.get(id=id)
+
+        role_id = request.data.get("role_id", None)
+        if role_id:
+            role = Role.objects.get(id=role_id)
+            user.add_role(role)
+
+        user_serializer = UserSerializer(user)
+
+        return Response(
+            {
+                "success": True,
+                "message": "Updated user data",
+                "data": {"user": user_serializer.data},
+            },
+            status=HTTP_200_OK,
+        )
+
+    except User.DoesNotExist:
+        return Response(
+            {"success": False, "message": f"The user with id {id} does not exist"},
+            status=HTTP_400_BAD_REQUEST,
+        )
+
+    except Role.DoesNotExist:
+        return Response(
+            {"success": False, "message": f"The role with id {role_id} does not exist"},
+            status=HTTP_400_BAD_REQUEST,
+        )
