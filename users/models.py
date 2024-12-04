@@ -1,3 +1,4 @@
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 
@@ -30,13 +31,15 @@ class Permission(models.Model):
         db_table = "permission"
 
 
-class User(models.Model):
-    username = models.CharField(max_length=150, unique=True)
-    email = models.EmailField(unique=True)
-    password = models.CharField(max_length=128)
-    is_active = models.BooleanField(default=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+class User(AbstractUser):
+    """
+    User model, inherited from Django Abstract User
+    """
+
+    first_name = None
+    last_name = None
+    last_login = None
+
     roles = models.ManyToManyField(Role, related_name="users", blank=True)
     permissions = models.ManyToManyField("Permission", related_name="users", blank=True)
 
