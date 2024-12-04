@@ -1,10 +1,10 @@
 from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import IsAdminUser
+from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK, HTTP_201_CREATED, HTTP_400_BAD_REQUEST
 
 from users.models import Permission, Role, User
-from users.permissions import Level1Permission
+from users.permissions import L1Permission, L2Permission, L3Permission
 from users.serializers import PermissionSerializer, RoleSerializer, UserSerializer
 
 
@@ -188,7 +188,7 @@ def get_role_permissions(request, id):
     
 
 @api_view(["GET"])
-@permission_classes([IsAdminUser])
+@permission_classes([IsAuthenticated, L1Permission])
 def api1(request):
     """
     API_ONE
@@ -201,7 +201,7 @@ def api1(request):
 
 
 @api_view(["GET"])
-@permission_classes([IsAdminUser])
+@permission_classes([IsAuthenticated, L1Permission])
 def api2(request):
     """
     API_TWO
@@ -214,7 +214,7 @@ def api2(request):
 
 
 @api_view(["GET"])
-@permission_classes([IsAdminUser])
+@permission_classes([IsAuthenticated, L2Permission])
 def api3(request):
     """
     API_THREE
@@ -226,7 +226,7 @@ def api3(request):
     )
 
 @api_view(["GET"])
-@permission_classes([IsAdminUser])
+@permission_classes([IsAuthenticated, L3Permission])
 def api4(request):
     """
     API_FOUR
