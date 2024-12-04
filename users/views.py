@@ -185,3 +185,53 @@ def get_permissions(request, id):
             status=HTTP_400_BAD_REQUEST,
         )
     
+
+@api_view(["GET"])
+@permission_classes([IsAdminUser])
+def api1(request):
+    """
+    API_ONE
+    """
+
+    return Response(
+        {"success": True, "message": "You are using API_ONE", "data": {}},
+        status=HTTP_200_OK,
+    )
+
+
+@api_view(["GET"])
+@permission_classes([IsAdminUser])
+def api2(request):
+    """
+    API_TWO
+    """
+
+    return Response(
+        {"success": True, "message": "You are using API_TWO", "data": {}},
+        status=HTTP_200_OK,
+    )
+
+
+@api_view(["GET"])
+@permission_classes([IsAdminUser])
+def api3(request):
+    """
+    API_THREE
+    """
+
+    return Response(
+        {"success": True, "message": "You are using API_THREE", "data": {}},
+        status=HTTP_200_OK,
+    )
+
+@api_view(["GET"])
+@permission_classes([IsAdminUser])
+def api4(request):
+    """
+    API_FOUR
+    """
+
+    return Response(
+        {"success": True, "message": "You are using API_FOUR", "data": {}},
+        status=HTTP_200_OK,
+    )
