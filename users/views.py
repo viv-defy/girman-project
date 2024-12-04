@@ -3,8 +3,8 @@ from rest_framework.permissions import IsAdminUser
 from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK, HTTP_201_CREATED, HTTP_400_BAD_REQUEST
 
-from users.models import Role, User
-from users.serializers import UserSerializer
+from users.models import Permission, Role, User
+from users.serializers import RoleSerializer, UserSerializer
 
 
 @api_view(["POST"])
@@ -87,5 +87,60 @@ def assign_role(request, id):
     except Role.DoesNotExist:
         return Response(
             {"success": False, "message": f"The role with id {role_id} does not exist"},
+            status=HTTP_400_BAD_REQUEST,
+        )
+
+
+@api_view(["GET"])
+@permission_classes([IsAdminUser])
+def get_users(request):
+    """
+    Get roles list
+    """
+
+    roles = Role.objects.all()
+    role_serializer = RoleSerializer(roles, many=True)
+
+    return Response(
+        {"success": True, "message": "Roles list", "data": role_serializer.data},
+        status=HTTP_200_OK,
+    )
+
+
+@api_view(["PATCH"])
+@permission_classes([IsAdminUser])
+def assign_permission(request, id):
+    """
+    Assign permissions to roles
+    """
+
+    try:
+        role = Role.objects.get(id=id)
+
+        permission_id = request.data.get("permission_id", None)
+        if permission_id:
+            permission = Permission.objects.get(id=permission_id)
+            role.add_permission(permission)
+
+        role_serializer = RoleSerializer(role)
+
+        return Response(
+            {
+                "success": True,
+                "message": "Updated role data",
+                "data": {"user": role_serializer.data},
+            },
+            status=HTTP_200_OK,
+        )
+
+    except Role.DoesNotExist:
+        return Response(
+            {"success": False, "message": f"The role with id {id} does not exist"},
+            status=HTTP_400_BAD_REQUEST,
+        )
+
+    except Permission.DoesNotExist:
+        return Response(
+            {"success": False, "message": f"The role with id {permission_id} does not exist"},
             status=HTTP_400_BAD_REQUEST,
         )

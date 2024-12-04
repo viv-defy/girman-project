@@ -8,6 +8,12 @@ class Role(models.Model):
     def __str__(self):
         return self.name
     
+    def add_permission(self, permission):
+        """
+        Assign a permission to the user.
+        """
+        self.permissions.add(permission)
+    
     class Meta:
         db_table = "role"
 
