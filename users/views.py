@@ -1,5 +1,5 @@
 from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import IsAdminUser
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK, HTTP_201_CREATED, HTTP_400_BAD_REQUEST
 
@@ -8,7 +8,7 @@ from users.serializers import PermissionSerializer, RoleSerializer, UserSerializ
 
 
 @api_view(["POST"])
-@permission_classes([IsAdminUser])
+@permission_classes([IsAuthenticated])
 def add_user(request):
     """
     Add a new user
@@ -37,7 +37,7 @@ def add_user(request):
 
 
 @api_view(["GET"])
-@permission_classes([IsAdminUser])
+@permission_classes([IsAuthenticated])
 def get_users(request):
     """
     Get users list
@@ -53,7 +53,7 @@ def get_users(request):
 
 
 @api_view(["PATCH"])
-@permission_classes([IsAdminUser])
+@permission_classes([IsAuthenticated])
 def assign_role(request, id):
     """
     Assign user role
@@ -92,7 +92,7 @@ def assign_role(request, id):
 
 
 @api_view(["GET"])
-@permission_classes([IsAdminUser])
+@permission_classes([IsAuthenticated])
 def get_roles(request):
     """
     Get roles list
@@ -108,7 +108,7 @@ def get_roles(request):
 
 
 @api_view(["PATCH"])
-@permission_classes([IsAdminUser])
+@permission_classes([IsAuthenticated])
 def assign_permission(request, id):
     """
     Assign permissions to roles
@@ -147,7 +147,7 @@ def assign_permission(request, id):
 
 
 @api_view(["GET"])
-@permission_classes([IsAdminUser])
+@permission_classes([IsAuthenticated])
 def get_permissions(request):
     """
     Get permissions list
@@ -163,7 +163,7 @@ def get_permissions(request):
 
 
 @api_view(["GET"])
-@permission_classes([IsAdminUser])
+@permission_classes([IsAuthenticated])
 def get_permissions(request, id):
     """
     Get permissions list for a role
@@ -187,7 +187,7 @@ def get_permissions(request, id):
     
 
 @api_view(["GET"])
-@permission_classes([IsAdminUser])
+@permission_classes([IsAuthenticated])
 def api1(request):
     """
     API_ONE
@@ -200,7 +200,7 @@ def api1(request):
 
 
 @api_view(["GET"])
-@permission_classes([IsAdminUser])
+@permission_classes([IsAuthenticated])
 def api2(request):
     """
     API_TWO
@@ -213,7 +213,7 @@ def api2(request):
 
 
 @api_view(["GET"])
-@permission_classes([IsAdminUser])
+@permission_classes([IsAuthenticated])
 def api3(request):
     """
     API_THREE
@@ -225,7 +225,7 @@ def api3(request):
     )
 
 @api_view(["GET"])
-@permission_classes([IsAdminUser])
+@permission_classes([IsAuthenticated])
 def api4(request):
     """
     API_FOUR
